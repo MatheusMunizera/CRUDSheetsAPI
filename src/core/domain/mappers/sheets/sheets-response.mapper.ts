@@ -1,8 +1,6 @@
-import { Mapper } from "src/core/base/mapper";
-import { SheetsEntity } from "src/core/domain/entities/sheets.entity";
-import { SheetsResponseDto } from "src/shared/dtos/sheets/sheets-response.dto";
-
-
+import { Mapper } from "../../../base/mapper";
+import { SheetsEntity } from "../../entities/sheets.entity";
+import { SheetsResponseDto } from "../../../../shared/dtos/sheets/sheets-response.dto";
 
 export class SheetsResponseMapper implements Mapper<SheetsResponseDto, SheetsEntity>{
     

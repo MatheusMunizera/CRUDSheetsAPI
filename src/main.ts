@@ -16,8 +16,7 @@ async function bootstrap() {
     allowedHeaders: '*',
     origin: '*',
   });
-  console.log(app);
-
+  
   await app.listen(3000);
 }
 
