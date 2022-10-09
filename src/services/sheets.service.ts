@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Service } from "src/core/base/service";
-import { SheetsResponseMapper } from "src/core/domain/mappers/sheets/sheets-response.mapper";
+import { SheetsResponseMapper } from "../core/domain/mappers/sheets/sheets-response.mapper";
 import { SheetsMapper } from "src/core/domain/mappers/sheets/sheets.mapper";
 import { SheetsRepository } from "src/core/repositories/sheet.repository";
 import { SheetsResponseDto } from "src/shared/dtos/sheets/sheets-response.dto";
