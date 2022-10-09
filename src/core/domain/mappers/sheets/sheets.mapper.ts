@@ -17,8 +17,6 @@ export class SheetsMapper extends Mapper<SheetsDto, SheetsEntity>{
     public mapTo(data: SheetsEntity): SheetsDto {
         const sheets = new SheetsDto();
 
-
-        sheets.id = data.id;
         sheets.name = data.name;
 
         return sheets;
