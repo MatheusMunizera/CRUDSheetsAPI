@@ -1,6 +1,7 @@
-import { Mapper } from "src/core/base/mapper";
-import { SheetsEntity } from "src/core/domain/entities/sheets.entity";
-import { SheetsDto } from "src/shared/dtos/sheets/sheets.dto";
+import { SheetsDto } from "../../../../shared/dtos/sheets/sheets.dto";
+import { Mapper } from "../../../base/mapper";
+import { SheetsEntity } from "../../entities/sheets.entity";
+
 
 
 

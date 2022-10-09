@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { SheetsEntity } from "src/core/domain/entities/sheets.entity";
-import { SheetsRepository } from "src/core/repositories/sheet.repository";
+import { SheetsEntity } from "../../../core/domain/entities/sheets.entity";
+import { SheetsRepository } from "../../../core/repositories/sheet.repository";
+
 import { RepositoryCache } from "../repository-cache";
 
 

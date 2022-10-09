@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { SheetsService } from "src/services/sheets.service";
-import { SheetsResponseDto } from "src/shared/dtos/sheets/sheets-response.dto";
-import { SheetsDto } from "src/shared/dtos/sheets/sheets.dto";
+import { SheetsService } from "../services/sheets.service";
+import { SheetsResponseDto } from "../shared/dtos/sheets/sheets-response.dto";
+import { SheetsDto } from "../shared/dtos/sheets/sheets.dto";
+
 
 
 

@@ -1,10 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
-
-
-import { Entity } from "src/core/base/entity";
-import { Repository } from "src/core/base/repository";
+import { Entity } from "../../core/base/entity";
+import { Repository } from "../../core/base/repository";
 
 
 
