@@ -1,8 +1,5 @@
 {
-    "version": 1,
-    "env" : {
-        "SHEET_URI" : "@sheet_uri"
-    },
+    "version": 2,
     "builds":[
         {
             "src": "src/main.ts",
