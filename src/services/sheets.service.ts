@@ -12,12 +12,11 @@ export class SheetsService extends GoogleService {
   @Inject(ConfigService)
   //Todo | TO DO
   // Authentication
-  //Variavel de ambiente e Deploy (nao dar commit com o arquivo de credenciais)
   //Arrumar get e estrutura
   private sheetsMapper: SheetsMapper;
   private sheetsResponseMapper: SheetsResponseMapper;
-  public spreadsheetId: string = process.env.SPREADSHEETID;
-  public nameSheet: string = process.env.NAMESHEET;
+  public spreadsheetId: string = '1PFCI_GqZ9p3aLPLwOA4oS55ylx-0g0wPDMEeDcrvtIk';
+  public nameSheet: string = 'CRUD';
   public config: ConfigService;
 
   constructor(private readonly repository: SheetsRepository) {
