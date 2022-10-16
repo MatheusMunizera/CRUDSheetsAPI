@@ -1,4 +1,4 @@
-import { HttpException, Inject,  Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SheetsResponseMapper } from '../core/domain/mappers/sheets/sheets-response.mapper';
 import { SheetsMapper } from '../core/domain/mappers/sheets/sheets.mapper';
@@ -14,11 +14,10 @@ export class SheetsService extends GoogleService {
   // Authentication
   //Variavel de ambiente e Deploy (nao dar commit com o arquivo de credenciais)
   //Arrumar get e estrutura
-
   private sheetsMapper: SheetsMapper;
   private sheetsResponseMapper: SheetsResponseMapper;
-  public spreadsheetId : string = process.env.SPREADSHEETID;
-  public nameSheet : string = process.env.NAMESHEET;
+  public spreadsheetId: string = process.env.SPREADSHEETID;
+  public nameSheet: string = process.env.NAMESHEET;
   public config: ConfigService;
 
   constructor(private readonly repository: SheetsRepository) {
@@ -27,25 +26,30 @@ export class SheetsService extends GoogleService {
     this.sheetsResponseMapper = new SheetsResponseMapper();
   }
 
-  public async clearRows(range?: string) {
-    if (range) {
+  public async clearRows(rangeRow?: string) {
+    let range = this.nameSheet;
+    if (rangeRow) {
       if (
-        range.startsWith('1') ||
-        range.includes('A1:') ||
-        range.endsWith('A1')
+        rangeRow.startsWith('1') ||
+        rangeRow.includes('A1:') ||
+        rangeRow.endsWith('A1')
       )
         throw new Error(`Invalid Range: Dont acces to change the first row`);
 
-      if (!range.includes(':') && range.length == 2 && range.endsWith('1'))
+      if (
+        !rangeRow.includes(':') &&
+        rangeRow.length == 2 &&
+        rangeRow.endsWith('1')
+      )
         throw new Error(`Invalid Range: Dont acces to change the first row`);
 
-      this.nameSheet= `${this.nameSheet}!${range}`;
+      range = `${this.nameSheet}!${rangeRow}`;
     }
 
     const firstRow = await this.getRows('1:1');
     const request = {
-      spreadsheetId : this.spreadsheetId,
-      range:this.nameSheet,
+      spreadsheetId: this.spreadsheetId,
+      range,
       auth: this.AUTH,
     };
 
@@ -55,7 +59,6 @@ export class SheetsService extends GoogleService {
       if (!range) {
         const keysFirstRow = Object.keys(firstRow);
         await this.write(keysFirstRow);
-        
       }
     } catch (ex) {
       console.error('Erro clearing row: ', ex.message);
@@ -63,20 +66,26 @@ export class SheetsService extends GoogleService {
     }
   }
 
-  public async updateByRange(sheets: SheetsDto, range: string) {
-
-
-    if (range.startsWith('1') || range.includes('A1:') || range.endsWith('A1'))
+  public async updateByRange(sheets: SheetsDto, rangeRow: string) {
+    if (
+      rangeRow.startsWith('1') ||
+      rangeRow.includes('A1:') ||
+      rangeRow.endsWith('A1')
+    )
       throw new Error(`Invalid Range: Dont acces to change the first row`);
 
-    if (!range.includes(':') && range.length == 2 && range.endsWith('1'))
+    if (
+      !rangeRow.includes(':') &&
+      rangeRow.length == 2 &&
+      rangeRow.endsWith('1')
+    )
       throw new Error(`Invalid Range: Dont acces to change the first row`);
 
-      this.nameSheet = `${this.nameSheet}!${range}`;
+    const range = `${this.nameSheet}!${rangeRow}`;
 
     const request = {
-      spreadsheetId: this.spreadsheetId ,
-      range: this.nameSheet,
+      spreadsheetId: this.spreadsheetId,
+      range,
       auth: this.AUTH,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
@@ -93,10 +102,10 @@ export class SheetsService extends GoogleService {
   }
 
   public async write(sheets: SheetsDto | string[]) {
-
+    const range = this.nameSheet;
     const request = {
-      spreadsheetId : this.spreadsheetId ,
-      range : this.nameSheet,
+      spreadsheetId: this.spreadsheetId,
+      range,
       auth: this.AUTH,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
@@ -104,25 +113,23 @@ export class SheetsService extends GoogleService {
       },
     };
 
-    
     try {
-      
-     await this.repository.create(request);
+      await this.repository.create(request);
     } catch (ex) {
-      console.log(ex.message)
-      throw new HttpException(ex.message,400)
-
+      console.log(ex.message);
+      throw new HttpException(ex.message, 400);
     }
   }
 
-  public async getRows(range?: string): Promise<SheetsResponseDto> {
-    if (range) {
-      this.nameSheet= `${this.nameSheet}!${range}`;
+  public async getRows(rangeRow?: string): Promise<SheetsResponseDto> {
+    let range = this.nameSheet
+    if (rangeRow) {
+      range = `${this.nameSheet}!${rangeRow}`;
     }
 
     const request = {
-      spreadsheetId : this.spreadsheetId,
-      range: this.nameSheet,
+      spreadsheetId: this.spreadsheetId,
+      range,
       auth: this.AUTH,
       valueRenderOption: 'FORMATTED_VALUE',
     };
@@ -159,9 +166,7 @@ export class SheetsService extends GoogleService {
       return result;
     } catch (ex) {
       console.error('Erro on getting row: ', ex.message);
-      throw new HttpException(`Erro getting row: ${ex.message}`, 404)
-
+      throw new HttpException(`Erro getting row: ${ex.message}`, 404);
     }
   }
-
 }
