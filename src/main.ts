@@ -18,11 +18,15 @@ async function bootstrap() {
     origin: '*',
   });
 
+  
+
   const config = new DocumentBuilder()
-    .setTitle('Documentação com Swagger')
+    .setTitle('SheetsAPI Swagger Documentation')
     .setDescription(
-      'Descrição do Swagger',
+      `A Rest API to manage all data from your sheets`
     )
+    .setContact('Matheus Muniz Dantas','https://matheusmuniz.dev','matheus.munizera@gmail.com')
+    .setExternalDoc('See the SheetsAPI on Google', 'https://docs.google.com/spreadsheets/d/1PFCI_GqZ9p3aLPLwOA4oS55ylx-0g0wPDMEeDcrvtIk/edit?usp=sharing')
     .setVersion('1.0')
     .build();
 

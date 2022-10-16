@@ -5,28 +5,33 @@ import { SheetsResponseDto } from "../../../../shared/dtos/sheets/sheets-respons
 
 export class SheetsResponseMapper implements Mapper<SheetsResponseDto, SheetsEntity>{
     
-   public mapFrom(data: SheetsResponseDto): SheetsEntity {
-        const user = new SheetsEntity();
-
-
-        user.id = data.id;
-        user.name = data.name;
-
-
-        return user;
-    }
-
-
-   public mapTo(data: SheetsEntity): SheetsResponseDto {
-        const user = new SheetsResponseDto();
-
-
-        user.id = data.id;
-        user.name = data.name;
-
-
-        return user;
-    }
-
-
-}
+    public mapFrom(response: SheetsResponseDto): SheetsEntity {
+         const sheet = new SheetsEntity();
+         
+         sheet.camisa = response.camisa;
+         sheet.despesas = response.despesas;
+         sheet.name = response.name;
+         sheet.numero = response.numero;
+         sheet.profisssao = response.profisssao;
+         sheet.salario = response.salario;
+ 
+ 
+         return sheet;
+     }
+ 
+ 
+    public mapTo(sheet: SheetsEntity): SheetsResponseDto {
+         const response = new SheetsResponseDto();
+ 
+          response.camisa = sheet.camisa;
+          response.despesas = sheet.despesas;
+          response.name = sheet.name;
+          response.numero = sheet.numero;
+          response.profisssao = sheet.profisssao;
+          response.salario = sheet.salario;
+ 
+         return response;
+     }
+ 
+ 
+ }
