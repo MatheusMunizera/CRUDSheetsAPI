@@ -84,7 +84,7 @@ export class SheetsService extends GoogleService {
 
     const request = {
       spreadsheetId: this.spreadsheetId,
-      range,
+      range : range,
       auth: this.AUTH,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
@@ -104,7 +104,7 @@ export class SheetsService extends GoogleService {
     const range = this.nameSheet;
     const request = {
       spreadsheetId: this.spreadsheetId,
-      range,
+      range: range,
       auth: this.AUTH,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
@@ -128,7 +128,7 @@ export class SheetsService extends GoogleService {
 
     const request = {
       spreadsheetId: this.spreadsheetId,
-      range,
+      range: range,
       auth: this.AUTH,
       valueRenderOption: 'FORMATTED_VALUE',
     };
