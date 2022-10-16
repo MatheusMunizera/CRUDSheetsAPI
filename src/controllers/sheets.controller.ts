@@ -27,7 +27,7 @@ export class SheetsController {
   constructor(private sheetsService: SheetsService) {}
 
   //#region Endpoints to CREATE data
-  @Post('write')
+  @Post()
   @ApiHeaders()
   @ApiResponse({
     status: 201,
@@ -53,7 +53,7 @@ export class SheetsController {
   //#endregion
 
   //#region Endpoints to UPDATE data 
-  @Put('update/:range')
+  @Put(':range')
   @ApiHeaders()
   @ApiResponse({
     status: 204,
@@ -135,7 +135,7 @@ export class SheetsController {
   //#endregion
 
   //#region Endpoints to DELETE data
-  @Delete('remove/:range')
+  @Delete(':range')
   @ApiHeaders()
   @ApiResponse({
     status: 204,
@@ -162,7 +162,7 @@ export class SheetsController {
     throw new HttpException('Sheets has been clean', HttpStatus.NO_CONTENT);
   }
 
-  @Delete('remove')
+  @Delete()
   @ApiHeaders()
   @ApiResponse({
     status: 204,

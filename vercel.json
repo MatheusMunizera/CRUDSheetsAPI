@@ -12,7 +12,9 @@
             "dest": "src/main.ts",
             "methods": [
                 "GET",
-                "POST"
+                "POST",
+                "PUT",
+                "DELETE"
             ]
         }
     ]

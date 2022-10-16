@@ -11,12 +11,12 @@ import { GoogleService } from './google.service';
 export class SheetsService extends GoogleService {
   @Inject(ConfigService)
   //Todo | TO DO
-  // Authentication
+  //Authentication
   //Arrumar get e estrutura
   private sheetsMapper: SheetsMapper;
   private sheetsResponseMapper: SheetsResponseMapper;
-  public spreadsheetId: string = '1PFCI_GqZ9p3aLPLwOA4oS55ylx-0g0wPDMEeDcrvtIk';
-  public nameSheet: string = 'CRUD';
+  public spreadsheetId: string = process.env.SPREADSHEETID;
+  public nameSheet: string = process.env.NAMESHEET;
   public config: ConfigService;
 
   constructor(private readonly repository: SheetsRepository) {
