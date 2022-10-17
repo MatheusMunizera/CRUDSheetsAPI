@@ -101,7 +101,7 @@ export class SheetsController {
     description: 'Sheets cannot be found',
     type: NotFoundSwagger,
   })
-  public async getAllRows(@Headers() headers): Promise<SheetsResponseDto> {
+  public async getAllRows(@Headers() headers): Promise<any> {
     headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
     headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
     return await this.sheetsService.getRows();
@@ -111,7 +111,7 @@ export class SheetsController {
   @ApiResponse({
     status: 200,
     description: 'All data from you sheets was been retrieved',
-    type: [SheetsResponseDto],
+    //type: [any],
   })
   @ApiResponse({
     status: 400,
@@ -126,7 +126,7 @@ export class SheetsController {
   public async getRow(
     @Param('range') range: string,
     @Headers() headers,
-  ): Promise<SheetsResponseDto> {
+  ): Promise<any> {
     headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
     headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
     return await this.sheetsService.getRows(range);
