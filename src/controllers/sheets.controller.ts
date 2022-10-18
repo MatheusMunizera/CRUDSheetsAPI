@@ -28,7 +28,6 @@ export class SheetsController {
 
   //#region Endpoints to CREATE data
   @Post()
-  @ApiHeaders()
   @ApiResponse({
     status: 201,
     description: 'The data has been successfully created.',
@@ -84,7 +83,7 @@ export class SheetsController {
   //#endregion
 
   //#region Endpoints to GET data
-  @Get('todos')
+  @Get('all')
   @ApiHeaders()
   @ApiResponse({
     status: 200,
