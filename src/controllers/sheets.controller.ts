@@ -53,7 +53,6 @@ export class SheetsController {
 
   //#region Endpoints to UPDATE data 
   @Put(':range')
-  @ApiHeaders()
   @ApiResponse({
     status: 204,
     description: 'Sheets has been updated',
@@ -84,7 +83,6 @@ export class SheetsController {
 
   //#region Endpoints to GET data
   @Get('all')
-  @ApiHeaders()
   @ApiResponse({
     status: 200,
     description: 'All data from you sheets was been retrieved',
@@ -106,7 +104,6 @@ export class SheetsController {
     return await this.sheetsService.getRows();
   }
   @Get(':range')
-  @ApiHeaders()
   @ApiResponse({
     status: 200,
     description: 'All data from you sheets was been retrieved',
@@ -135,7 +132,6 @@ export class SheetsController {
 
   //#region Endpoints to DELETE data
   @Delete(':range')
-  @ApiHeaders()
   @ApiResponse({
     status: 204,
     description: 'The range of your sheets has been clean',
@@ -162,7 +158,6 @@ export class SheetsController {
   }
 
   @Delete()
-  @ApiHeaders()
   @ApiResponse({
     status: 204,
     description: 'Sheets has been clean',
