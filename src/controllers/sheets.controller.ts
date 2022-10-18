@@ -84,7 +84,7 @@ export class SheetsController {
   //#endregion
 
   //#region Endpoints to GET data
-  @Get('all/teste')
+  @Get('alls')
   @ApiHeaders()
   @ApiResponse({
     status: 200,
