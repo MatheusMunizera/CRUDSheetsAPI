@@ -11,7 +11,6 @@
             "src" : "/(.*)",
             "dest": "src/main.ts",
             "headers": { "Access-Control-Allow-Origin":  "*" },
-
             "methods": [
                 "GET",
                 "POST",
