@@ -16,7 +16,6 @@ async function bootstrap() {
     )
     .setContact('Matheus Muniz Dantas','https://matheusmuniz.dev','matheus.munizera@gmail.com')
     .setExternalDoc('See the SheetsAPI on Google', 'https://docs.google.com/spreadsheets/d/1PFCI_GqZ9p3aLPLwOA4oS55ylx-0g0wPDMEeDcrvtIk/edit?usp=sharing')
-    .setExternalDoc('See the SheetsAPI on GITHUB', 'https://github.com/MatheusMunizera/SheetsAPI')
     .setVersion('1.0')
     .build();
 

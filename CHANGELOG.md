@@ -1,3 +1,5 @@
+# V1.1.1
+[MUNIZERA][FIX] - Ajuste dto
 # V1.1.0
 [MUNIZERA][FEATURE] - Log timer, novas entidade
 [MUNIZERA][FIX] - Ajustes retornor dos endpoints

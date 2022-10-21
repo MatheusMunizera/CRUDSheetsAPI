@@ -57,7 +57,7 @@ export class SheetsService extends GoogleService {
       range = `${this.nameSheet}!${rangeRow}`;
     }
 
-    const firstRow = await this.getRows('1:1');
+    const firstRow = await this.getRows('1:2');
 
     const request = {
       spreadsheetId: this.spreadsheetId,
@@ -129,7 +129,7 @@ export class SheetsService extends GoogleService {
   public async write(sheets: SheetsDto) {
     console.time('Write');
     const range = this.nameSheet;
-
+    
     const request = {
       spreadsheetId: this.spreadsheetId,
       range: range,
@@ -139,6 +139,8 @@ export class SheetsService extends GoogleService {
         values: [Object.values(sheets)],
       },
     };
+
+    console.log(sheets)
 
     try {
       await this.repository.create(request);

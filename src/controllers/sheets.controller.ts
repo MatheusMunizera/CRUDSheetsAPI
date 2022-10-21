@@ -3,18 +3,14 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
-  HttpCode,
   HttpException,
   HttpStatus,
   Param,
   Post,
   Put,
-  Res,
 } from '@nestjs/common';
 import { SheetsService } from '../services/sheets.service';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { ApiHeaders } from '../helpers/headers/headers';
 import { SheetsDto } from '../shared/dtos/sheets/sheets.dto';
 import { SheetsResponseDto } from '../shared/dtos/sheets/sheets-response.dto';
 import { BadRequestSwagger } from '../helpers/swagger/bad-request.swagger';
@@ -42,11 +38,11 @@ export class SheetsController {
     description: 'Sheets cannot be found',
     type: NotFoundSwagger,
   })
-  public async writeRow(@Body() sheets: SheetsDto, @Headers() headers) {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
-    
-    await this.sheetsService.write(sheets);
+  public async writeRow(@Body() sheets: SheetsDto, ) {
+    let forms = sheets;
+    if(sheets['values'])
+      forms = sheets['values'];
+    await this.sheetsService.write(forms);
     throw new HttpException('Sheets has been created', HttpStatus.CREATED);
   }
   //#endregion
@@ -70,13 +66,13 @@ export class SheetsController {
   })
   public async updateRow(
     @Body() sheets: SheetsDto,
-    @Param('range') range: string,
-    @Headers() headers,
+    @Param('range') range: string
   ): Promise<void> {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
 
-    await this.sheetsService.updateByRange(sheets, range);
+    let forms = sheets;
+    if(sheets['values'])
+      forms = sheets['values'];
+    await this.sheetsService.updateByRange(forms['values'], range);
     throw new HttpException('Sheets has been updated', HttpStatus.NO_CONTENT);
   }
   //#endregion
@@ -98,9 +94,8 @@ export class SheetsController {
     description: 'Sheets cannot be found',
     type: NotFoundSwagger,
   })
-  public async getAllRows(@Headers() headers): Promise<any> {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
+  public async getAllRows(): Promise<any> {
+
     return await this.sheetsService.getRows();
   }
   @Get(':range')
@@ -121,10 +116,8 @@ export class SheetsController {
   })
   public async getRow(
     @Param('range') range: string,
-    @Headers() headers,
   ): Promise<any> {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
+
     return await this.sheetsService.getRows(range);
   }
 
@@ -149,10 +142,8 @@ export class SheetsController {
   })
   public async deleteRow(
     @Param('range') range: string,
-    @Headers() headers,
   ): Promise<void> {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
+
     await this.sheetsService.clearRows(range);
     throw new HttpException('Sheets has been clean', HttpStatus.NO_CONTENT);
   }
@@ -173,9 +164,8 @@ export class SheetsController {
     description: 'Sheets cannot be found',
     type: NotFoundSwagger,
   })
-  public async deleteRows(@Headers() headers): Promise<void> {
-    headers['x-identify-sheet'] ? this.sheetsService.spreadsheetId = headers['x-identify-sheet']: '';
-    headers['x-name-sheet'] ? this.sheetsService.nameSheet = headers['x-name-sheet']: '';
+  public async deleteRows(): Promise<void> {
+
     await this.sheetsService.clearRows();
     throw new HttpException('Sheets has been clean', HttpStatus.NO_CONTENT);
   }

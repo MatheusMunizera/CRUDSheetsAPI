@@ -13,6 +13,11 @@ export class SheetsDto {
         example: '01/05/2001',
       })
       birthdate: Date;
+
+      @ApiProperty({
+        example: 21,
+      })
+      age: number;
     
       @ApiProperty({
         example: GenderEnum.MALE,
@@ -24,7 +29,7 @@ export class SheetsDto {
       })
       sign: string;
       @ApiProperty({
-        example: '19497567340',
+        example: 19497567340,
       })
       cpf: number;
       @ApiProperty({
@@ -64,7 +69,7 @@ export class SheetsDto {
       })
       city: string;
       @ApiProperty({
-        example: '85983187119',
+        example: 85983187119,
       })
       phone: number;
       @ApiProperty({
