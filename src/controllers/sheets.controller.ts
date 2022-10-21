@@ -39,10 +39,7 @@ export class SheetsController {
     type: NotFoundSwagger,
   })
   public async writeRow(@Body() sheets: SheetsDto, ) {
-    let forms = sheets;
-    if(sheets['values'])
-      forms = sheets['values'];
-    await this.sheetsService.write(forms);
+    await this.sheetsService.write(sheets);
     throw new HttpException('Sheets has been created', HttpStatus.CREATED);
   }
   //#endregion
@@ -68,11 +65,7 @@ export class SheetsController {
     @Body() sheets: SheetsDto,
     @Param('range') range: string
   ): Promise<void> {
-
-    let forms = sheets;
-    if(sheets['values'])
-      forms = sheets['values'];
-    await this.sheetsService.updateByRange(forms['values'], range);
+    await this.sheetsService.updateByRange(sheets, range);
     throw new HttpException('Sheets has been updated', HttpStatus.NO_CONTENT);
   }
   //#endregion
