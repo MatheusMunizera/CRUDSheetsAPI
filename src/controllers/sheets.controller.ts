@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   HttpException,
   HttpStatus,
   Param,
@@ -38,6 +39,7 @@ export class SheetsController {
     description: 'Sheets cannot be found',
     type: NotFoundSwagger,
   })
+  @Header('Content-Type', 'application/json')
   public async writeRow(@Body() sheets: SheetsDto, ) {
     await this.sheetsService.write(sheets);
     throw new HttpException('Sheets has been created', HttpStatus.CREATED);
